@@ -167,6 +167,7 @@ void TIM4_IRQHandler(void)
 	OS_ENTER_CRITICAL(); /* Tell uC/OS-II that we are starting an ISR */
 	OSIntNesting++;
 	OS_EXIT_CRITICAL();
+	//Szemafort le kéne foglalni a displayValue -hoz OSSemAccept, OSSemPost
 	if ( TIM_GetITStatus( TIM4, TIM_IT_Update ) )
 	{
 		TIM_ClearITPendingBit( TIM4, TIM_IT_Update );

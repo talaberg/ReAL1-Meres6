@@ -61,11 +61,19 @@ int main(void)
 	OSInit();
 	/* Create Initialization Task */
 	OSTaskCreate(Task_Init,0,(OS_STK*)&TaskInitStack[DEFAULT_STACK_SIZE-1],TASK_INIT_PRIO);
+	
+	//OSTaskCreate(Task_Main,...);//1. feladat - TODO paraméterezni
+	
+	//OSTaskCreate(Task_UI,...); //7. feladat - parancsfeldolgozó taszk TODO paraméterezni
+	
+	
 	OS_EXIT_CRITICAL();
 	/* Start the OS */
 	OSStart();
 	/* OSStart() Never returns! */
 	while(1);
+	
+
 }
 
 void Task_Init(void* param)
@@ -77,6 +85,22 @@ void Task_Init(void* param)
 	BSP_LED_Init();
 
 	/* Create sync objects */
+	
+	//BSP_Display_Init();//1. feladat - Kijelzõ init
+	
+	//BSP_TempSensor_Init(); //2. feladat - hõmérés init
+	
+	//OSSemCreate(); //2. feladat - szemafor init
+	
+	//BSP_ADC_Init, BSP_Switch_Init 3. feladat
+	//Limithez szemafor készítés???
+	
+	//OSFlagCreate(); //4. feladat --> jelzõflag init
+	
+	//BSP_USART_Init(); //6. feladat  USART init
+	//OSSemCreate USARTnak???
+	
+	
 	/* Create tasks */
 	OSTaskCreate(Task_Demo,0,(OS_STK*)&TaskDemoStack[DEFAULT_STACK_SIZE-1],TASK_DEMO_PRIO);
 	OSTaskDel(OS_PRIO_SELF);
